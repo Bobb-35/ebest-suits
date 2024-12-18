@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBest Suits</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a2b3c;
+            --secondary-color: #8b4513;
+            --text-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --gold-accent: #d4af37;
+        }
+
+        nav {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 43, 60, 0.9), rgba(26, 43, 60, 0.7)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            background-color: var(--gold-accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #c19b2c;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .about {
+            background-color: var(--light-bg);
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact {
+            background-color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 43, 60, 0.8);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .business-info {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item h3 {
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--gold-accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-item {
+                height: 300px;
+            }
+
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">EBEST SUITS</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#collection">Collection</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
+                <a href="#contact">Book Fitting</a>
+            </div>
+            <button class="mobile-menu-btn">&#9776;</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Suits for Every Occasion</h1>
+            <p>Where Style Meets Excellence</p>
+            <button class="btn" id="cta-button">
+                View Collection
+                <span class="btn-shine"></span>
+            </button>
+        </div>
+    </section>
+
+    <section class="about" id="collection">
+        <div class="section-content">
+            <h2 class="section-title">Our Collection</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&q=80" alt="Classic Suit" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 5px;">
+                    <h3>Classic Suits</h3>
+                    <p>Timeless two-piece and three-piece suits crafted from the finest Italian wool. Starting from Ksh.12000.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1594938298613-d68f7c59bf41?auto=format&fit=crop&q=80" alt="Custom Tailoring" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 5px;">
+                    <h3>Custom Tailoring</h3>
+                    <p>Experience our renowned bespoke service with over 3000 fabric choices. Custom suits starting from Ksh.15000.</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1594938291221-94f18cbb5660?auto=format&fit=crop&q=80" alt="Wedding Collection" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 5px;">
+                    <h3>Wedding Collection</h3>
+                    <p>Make your special day unforgettable with our exclusive wedding suit collection. Starting from Ksh.15000.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section-content" style="padding: 5rem 2rem;">
+        <h2 class="section-title">Our Gallery</h2>
+        
+        <!-- Business Collection -->
+        <h3 class="collection-title" style="margin: 2rem 0 1rem; text-align: center;">Business Collection</h3>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&q=80" alt="Business Suit 1">
+                <div class="gallery-caption">Classic Business Suit</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1594938298613-d68f7c59bf41?auto=format&fit=crop&q=80" alt="Business Suit 2">
+                <div class="gallery-caption">Executive Style</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1594938291221-94f18cbb5660?auto=format&fit=crop&q=80" alt="Business Suit 3">
+                <div class="gallery-caption">Modern Business</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&q=80" alt="Business Suit 4">
+                <div class="gallery-caption">Professional Elite</div>
+            </div>
+        </div>
+
+        <!-- Wedding Collection -->
+        <h3 class="collection-title" style="margin: 2rem 0 1rem; text-align: center;">Wedding Collection</h3>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?auto=format&fit=crop&q=80" alt="Wedding Suit 1">
+                <div class="gallery-caption">Classic Wedding</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80" alt="Wedding Suit 2">
+                <div class="gallery-caption">Modern Tuxedo</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&q=80" alt="Wedding Suit 3">
+                <div class="gallery-caption">Summer Wedding</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1594938291221-94f18cbb5660?auto=format&fit=crop&q=80" alt="Wedding Suit 4">
+                <div class="gallery-caption">Luxury Wedding</div>
+            </div>
+        </div>
+
+        <!-- Casual Collection -->
+        <h3 class="collection-title" style="margin: 2rem 0 1rem; text-align: center;">Casual Collection</h3>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&q=80" alt="Casual Suit 1">
+                <div class="gallery-caption">Smart Casual</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?auto=format&fit=crop&q=80" alt="Casual Suit 2">
+                <div class="gallery-caption">Weekend Style</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80" alt="Casual Suit 3">
+                <div class="gallery-caption">Modern Casual</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?auto=format&fit=crop&q=80" alt="Casual Suit 4">
+                <div class="gallery-caption">Relaxed Fit</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="business-info">
+        <div class="info-grid">
+            <div class="info-item">
+                <h3>Our Story</h3>
+                <p>Founded in 2010, EBest Suits has been crafting premium suits for discerning gentlemen. Our commitment to quality and attention to detail has made us a trusted name in bespoke tailoring.</p>
+            </div>
+            <div class="info-item">
+                <h3>Our Process</h3>
+                <p>Each suit is crafted through a meticulous 20-step process, combining traditional tailoring techniques with modern precision. We ensure every detail meets our exacting standards.</p>
+            </div>
+            <div class="info-item">
+                <h3>Our Promise</h3>
+                <p>We guarantee perfect fit and satisfaction with every suit. Our master tailors work closely with you to create garments that exceed your expectations.</p>
+            </div>
+        </div>
+        <div class="contact-info">
+            <h3>Visit Our Showroom</h3>
+            <p>Taveta Road, Nairobi</p>
+            <p>Sunday - Friday: 8:00 AM - 8:00 PM</p>
+            <p>Saturday: By Appointment Only</p>
+            <p>Phone: 0722229431</p>
+            <p>Email: gnyaande@gmail.com</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="section-content">
+            <h2 class="section-title">Book a Fitting</h2>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Special Requirements</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your preferences or any specific requirements" required></textarea>
+                </div>
+                <button type="submit" class="btn">Schedule Appointment</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 EBEST SUITS. All rights reserved. | Premium Tailoring Since 2010</p>
+        <div class="social-links">
+            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? '&#10006;' : '&#9776;';
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-content') && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '&#9776;';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking a link
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '&#9776;';
+                }
+            });
+        });
+
+        // CTA button animation
+        const ctaButton = document.getElementById('cta-button');
+        ctaButton.addEventListener('click', () => {
+            document.querySelector('#collection').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Form submission handling
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Prepare email link
+            const subject = 'New Fitting Appointment Request';
+            const body = `Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email}
+Special Requirements: ${data.message}`;
+            
+            // Open default email client
+            window.location.href = `mailto:gnyaande@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Show confirmation message
+            alert('Thank you for your interest! Your appointment request has been sent. We will contact you within 24 hours to confirm your fitting appointment.');
+            contactForm.reset();
+        });
+
+        // Add scroll-based navbar background
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                nav.style.backgroundColor = 'white';
+            }
+        });
+    </script>
+</body>
+</html>
